@@ -17,26 +17,26 @@ namespace InlämningsuppgiftLINQ.Models
             courses = new List<Course>()
             {
 
-                new Course()
-                {
-                    CourseID = 101,
-                    Name = "SUT22",
-                    Subjects = new List<int>()
-                    {
-                        101,
-                        103
-                    }
-                },
-                new Course()
-                {
-                    CourseID = 102,
-                    Name = "SUT21",
-                    Subjects = new List<int>()
-                    {
-                        102,
-                        104
-                    }
-                }
+                //new Course()
+                //{
+                //    CourseID = 101,
+                //    Name = "SUT22",
+                //    Subjects = new List<int>()
+                //    {
+                //        101,
+                //        103
+                //    }
+                //},
+                //new Course()
+                //{
+                //    CourseID = 102,
+                //    Name = "SUT21",
+                //    Subjects = new List<int>()
+                //    {
+                //        102,
+                //        104
+                //    }
+                //}
             };
 
         }

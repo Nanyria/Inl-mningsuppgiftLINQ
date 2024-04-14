@@ -15,47 +15,47 @@ namespace InlämningsuppgiftLINQ.Models
         {
             students = new List<Student>()
             {
-                new Student()
-                {
-                    StudentID = 101,
-                    FirstName = "Anna",
-                    LastName = "Andersson",
-                    Courses = new List<int>()
-                    {
-                        102
-                    }
-                },
-                new Student()
-                {
-                    StudentID = 102,
-                    FirstName = "Bert",
-                    LastName = "Beritsson",
-                    Courses = new List<int>()
-                    {
-                        102
-                    }
-                },
-                new Student()
-                {
-                    StudentID = 103,
-                    FirstName = "Cecilia",
-                    LastName = "Carm",
-                    Courses = new List<int>()
-                    {
-                        101
-                    }
-                },
-                new Student()
-                {
-                    StudentID = 104,
-                    FirstName = "Dani",
-                    LastName = "Denire",
-                    Courses = new List<int>()
-                    {
-                        101
+                //new Student()
+                //{
+                //    StudentID = 101,
+                //    FirstName = "Anna",
+                //    LastName = "Andersson",
+                //    Courses = new List<int>()
+                //    {
+                //        102
+                //    }
+                //},
+                //new Student()
+                //{
+                //    StudentID = 102,
+                //    FirstName = "Bert",
+                //    LastName = "Beritsson",
+                //    Courses = new List<int>()
+                //    {
+                //        102
+                //    }
+                //},
+                //new Student()
+                //{
+                //    StudentID = 103,
+                //    FirstName = "Cecilia",
+                //    LastName = "Carm",
+                //    Courses = new List<int>()
+                //    {
+                //        101
+                //    }
+                //},
+                //new Student()
+                //{
+                //    StudentID = 104,
+                //    FirstName = "Dani",
+                //    LastName = "Denire",
+                //    Courses = new List<int>()
+                //    {
+                //        101
 
-                    }
-                }
+                //    }
+                //}
             };
         }
         public void Add(Student entity)

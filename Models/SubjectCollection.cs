@@ -14,56 +14,56 @@ namespace InlämningsuppgiftLINQ.Models
         {
             subjects = new List<Subject>()
             {
-                new Subject()
-                {
-                    SubjectID = 101,
-                    SubjectsName = "Math 1",
-                    Teachers = new List<int>()
-                    {
-                        //"Anas",
-                        101,
-                        //"Reidar"
-                        102
-                    }
-                },
-                new Subject()
-                {
-                    SubjectID = 102,
-                    SubjectsName = "Math 2",
-                    Teachers = new List<int>()
-                    {
-                        //"Reidar",
-                        102,
-                        //"Tobias"
-                        103
-                    }
-                },
-                new Subject()
-                {
-                    SubjectID = 103,
-                    SubjectsName = "Programming 1",
-                    Teachers = new List<int>()
-                    {
-                        //"Anas",
-                        101,
-                        //"Tobias"
-                        103
-                    }
-                },
-                new Subject()
-                {
-                    SubjectID = 104,
-                    SubjectsName = "Programming 2",
-                    Teachers = new List<int>()
-                    {
-                        //"Anas",
-                        101,
-                        //"Reidar",
-                        102,
-                        //"Tobias"
-                        103
-                    }
-                }
+                //new Subject()
+                //{
+                //    SubjectID = 101,
+                //    SubjectsName = "Math 1",
+                //    Teachers = new List<int>()
+                //    {
+                //        //"Anas",
+                //        101,
+                //        //"Reidar"
+                //        102
+                //    }
+                //},
+                //new Subject()
+                //{
+                //    SubjectID = 102,
+                //    SubjectsName = "Math 2",
+                //    Teachers = new List<int>()
+                //    {
+                //        //"Reidar",
+                //        102,
+                //        //"Tobias"
+                //        103
+                //    }
+                //},
+                //new Subject()
+                //{
+                //    SubjectID = 103,
+                //    SubjectsName = "Programming 1",
+                //    Teachers = new List<int>()
+                //    {
+                //        //"Anas",
+                //        101,
+                //        //"Tobias"
+                //        103
+                //    }
+                //},
+                //new Subject()
+                //{
+                //    SubjectID = 104,
+                //    SubjectsName = "Programming 2",
+                //    Teachers = new List<int>()
+                //    {
+                //        //"Anas",
+                //        101,
+                //        //"Reidar",
+                //        102,
+                //        //"Tobias"
+                //        103
+                //    }
+                //}
             };
         }
 
