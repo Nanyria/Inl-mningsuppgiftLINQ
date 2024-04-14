@@ -18,7 +18,7 @@ namespace InlämningsuppgiftLINQ.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data source = LUPIN;Database = LINQSchoolDb;Integrated Security = True;");
+            optionsBuilder.UseSqlServer("Data source = LUPIN;Database = LINQSchoolDb2.0;Integrated Security = True;");
         }
     }
 }

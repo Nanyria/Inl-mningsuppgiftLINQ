@@ -14,7 +14,10 @@ namespace InlämningsuppgiftLINQ.Models
         [Required]
         [StringLength(50)]
         public string SubjectsName { get; set; }
-        public ICollection<Teacher> Teachers { get; set; } //List<Teacher>?
+        public Course course { get; set; }
+        public int CourseID { get; set; }
+        public ICollection<Teacher> Teachers { get; set; } = new HashSet<Teacher>();
+        
 
     }
 }

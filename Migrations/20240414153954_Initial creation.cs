@@ -4,10 +4,23 @@
 
 namespace InlämningsuppgiftLINQ.Migrations
 {
-    public partial class InitialCreation : Migration
+    public partial class Initialcreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    CourseID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "100, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.CourseID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
@@ -36,32 +49,13 @@ namespace InlämningsuppgiftLINQ.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    CourseID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "100, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    StudentID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.CourseID);
-                    table.ForeignKey(
-                        name: "FK_Courses_Students_StudentID",
-                        column: x => x.StudentID,
-                        principalTable: "Students",
-                        principalColumn: "StudentID");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
                     SubjectID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "100, 1"),
                     SubjectsName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CourseID = table.Column<int>(type: "int", nullable: true)
+                    CourseID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +64,32 @@ namespace InlämningsuppgiftLINQ.Migrations
                         name: "FK_Subjects_Courses_CourseID",
                         column: x => x.CourseID,
                         principalTable: "Courses",
-                        principalColumn: "CourseID");
+                        principalColumn: "CourseID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseStudent",
+                columns: table => new
+                {
+                    CoursesCourseID = table.Column<int>(type: "int", nullable: false),
+                    StudentsStudentID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseStudent", x => new { x.CoursesCourseID, x.StudentsStudentID });
+                    table.ForeignKey(
+                        name: "FK_CourseStudent_Courses_CoursesCourseID",
+                        column: x => x.CoursesCourseID,
+                        principalTable: "Courses",
+                        principalColumn: "CourseID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseStudent_Students_StudentsStudentID",
+                        column: x => x.StudentsStudentID,
+                        principalTable: "Students",
+                        principalColumn: "StudentID",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,13 +113,14 @@ namespace InlämningsuppgiftLINQ.Migrations
                         column: x => x.TeachersTeacherID,
                         principalTable: "Teachers",
                         principalColumn: "TeacherID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction
+                        );
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_StudentID",
-                table: "Courses",
-                column: "StudentID");
+                name: "IX_CourseStudent_StudentsStudentID",
+                table: "CourseStudent",
+                column: "StudentsStudentID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Subjects_CourseID",
@@ -116,7 +136,13 @@ namespace InlämningsuppgiftLINQ.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CourseStudent");
+
+            migrationBuilder.DropTable(
                 name: "SubjectTeacher");
+
+            migrationBuilder.DropTable(
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
@@ -126,9 +152,6 @@ namespace InlämningsuppgiftLINQ.Migrations
 
             migrationBuilder.DropTable(
                 name: "Courses");
-
-            migrationBuilder.DropTable(
-                name: "Students");
         }
     }
 }
