@@ -94,6 +94,7 @@ namespace InlämningsuppgiftLINQ.Models
         {
             var subject = Find(id);
             subject.SubjectsName = entity.SubjectsName;
+            subject.Teachers = entity.Teachers;
         }
     }
 }

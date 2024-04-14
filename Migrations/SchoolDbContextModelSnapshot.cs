@@ -22,6 +22,21 @@ namespace InlämningsuppgiftLINQ.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.Property<int>("CoursesCourseID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsStudentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoursesCourseID", "StudentsStudentID");
+
+                    b.HasIndex("StudentsStudentID");
+
+                    b.ToTable("CourseStudent");
+                });
+
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.Course", b =>
                 {
                     b.Property<int>("CourseID")
@@ -35,12 +50,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("StudentID")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseID");
-
-                    b.HasIndex("StudentID");
 
                     b.ToTable("Courses");
                 });
@@ -124,11 +134,19 @@ namespace InlämningsuppgiftLINQ.Migrations
                     b.ToTable("SubjectTeacher");
                 });
 
-            modelBuilder.Entity("InlämningsuppgiftLINQ.Models.Course", b =>
+            modelBuilder.Entity("CourseStudent", b =>
                 {
+                    b.HasOne("InlämningsuppgiftLINQ.Models.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesCourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("InlämningsuppgiftLINQ.Models.Student", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("StudentID");
+                        .WithMany()
+                        .HasForeignKey("StudentsStudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.Subject", b =>
@@ -156,11 +174,6 @@ namespace InlämningsuppgiftLINQ.Migrations
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.Course", b =>
                 {
                     b.Navigation("Subjects");
-                });
-
-            modelBuilder.Entity("InlämningsuppgiftLINQ.Models.Student", b =>
-                {
-                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

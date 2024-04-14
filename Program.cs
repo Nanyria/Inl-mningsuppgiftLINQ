@@ -52,7 +52,7 @@ namespace InlämningsuppgiftLINQ
             {
                 new Subject()
                 {
-                    SubjectID = 101,
+                    //SubjectID = 101,
                     SubjectsName = "Math 1",
                     Teachers = new List<Teacher>()
                     {
@@ -64,7 +64,7 @@ namespace InlämningsuppgiftLINQ
                 },
                 new Subject()
                 {
-                    SubjectID = 102,
+                    //SubjectID = 102,
                     SubjectsName = "Math 2",
                 Teachers = new List<Teacher>()
                 {
@@ -76,7 +76,7 @@ namespace InlämningsuppgiftLINQ
                 },
                 new Subject()
                 {
-                    SubjectID = 103,
+                    //SubjectID = 103,
                     SubjectsName = "Programming 1",
                     Teachers = new List<Teacher>()
                     {
@@ -88,7 +88,7 @@ namespace InlämningsuppgiftLINQ
                 },
                     new Subject()
                 {
-                    SubjectID = 104,
+                    //SubjectID = 104,
                     SubjectsName = "Programming 2",
                     Teachers = new List<Teacher>()
                     {
@@ -102,47 +102,200 @@ namespace InlämningsuppgiftLINQ
                 }
             };
 
-            var teacher = new List<Teacher>()
+
+            var teachers = new List<Teacher>()
             {
                 new Teacher()
                 {
-                    TeacherID = 101,
+                    //TeacherID = 101,
                     TeacherName = "Anas",
-                    Subjects = new List<Subject>()
+                    Subjects = subjects
+                    .Where(s => new List<int> 
                     {
-                    //{
-                    //    101,
-                    //    103,
-                    //    104
+                        101, 
+                        103, 
+                        104 
                     }
+                    .Contains(s.SubjectID))
+                    .ToList()
                 },
                 new Teacher()
                 {
-                    TeacherID = 102,
+                    //TeacherID = 102,
                     TeacherName = "Reidar",
-                    Subjects = new List<Subject>()
+                    Subjects = subjects
+                    .Where(s => new List<int>
                     {
-                    //    101,
-                    //    102,
-                    //    104
+                        101,
+                        102,
+                        104
                     }
+                    .Contains(s.SubjectID))
+                    .ToList()
                 },
                 new Teacher()
                 {
-                    TeacherID = 103,
+                    //TeacherID = 103,
                     TeacherName = "Tobias",
-                    Subjects = new List<Subject>()
+                    Subjects = subjects
+                    .Where(s => new List<int> 
                     {
-                    //    102,
-                    //    103,
-                    //    104
+                        102, 
+                        103, 
+                        104 
                     }
+                    .Contains(s.SubjectID))
+                    .ToList()
+                }
+            };
+            var subjectsUpdate = new List<Subject>()
+            {
+                new Subject()
+                {
+                    SubjectID = 101,
+                    SubjectsName = "Math 1",
+                    Teachers = teachers
+                    .Where(s => new List<int>
+                    {
+                        101,
+                        102
+                    }
+                    .Contains(s.TeacherID))
+                    .ToList()
+                },
+                new Subject()
+                {
+                    SubjectID = 102,
+                    SubjectsName = "Math 2",
+                    Teachers = teachers
+                    .Where(s => new List<int>
+                    {
+                        102,
+                        103
+                    }
+                    .Contains(s.TeacherID))
+                    .ToList()
+                },
+                new Subject()
+                {
+                    SubjectID = 103,
+                    SubjectsName = "Programming 1",
+                    Teachers = teachers
+                    .Where(s => new List<int>
+                    {
+                        101,
+                        103
+                    }
+                    .Contains(s.TeacherID))
+                    .ToList()
+                },
+                    new Subject()
+                {
+                    SubjectID = 104,
+                    SubjectsName = "Programming 2",
+                    Teachers = teachers
+                    .Where(s => new List<int>
+                    {
+                        101,
+                        102,
+                        103
+                    }
+                    .Contains(s.TeacherID))
+                    .ToList()
                 }
             };
 
-            foreach (var subject in subjects)
+
+            var courses = new List<Course>()
             {
-                db.Subjects.Add(subject);
+
+                new Course()
+                {
+                    //CourseID = 101,
+                    Name = "SUT22",
+                    Subjects = subjects
+                    .Where(s => new List<int>
+                    {
+                        101,
+                        103,
+                    }
+                    .Contains(s.SubjectID))
+                    .ToList()
+                },
+                new Course()
+                {
+                    //CourseID = 102,
+                    Name = "SUT21",
+                    Subjects = subjects
+                    .Where(s => new List<int>
+                    {
+                        102,
+                        104
+                    }
+                    .Contains(s.SubjectID))
+                    .ToList()
+                }
+            };
+
+            var students = new List<Student>()
+            {
+                new Student()
+                {
+                    //StudentID = 101,
+                    FirstName = "Anna",
+                    LastName = "Andersson",
+                    Courses = courses
+                    .Where(s => new List<int>
+                    {
+                        102,
+                    }
+                    .Contains(s.CourseID))
+                    .ToList()
+                },
+                new Student()
+                {
+                    //StudentID = 102,
+                    FirstName = "Bert",
+                    LastName = "Beritsson",
+                    Courses = courses
+                    .Where(s => new List<int>
+                    {
+                        102,
+                    }
+                    .Contains(s.CourseID))
+                    .ToList()
+                },
+                new Student()
+                {
+                    //StudentID = 103,
+                    FirstName = "Cecilia",
+                    LastName = "Carm",
+                    Courses = courses
+                    .Where(s => new List<int>
+                    {
+                        101,
+                    }
+                    .Contains(s.CourseID))
+                    .ToList()
+                },
+                new Student()
+                {
+                    //StudentID = 104,
+                    FirstName = "Dani",
+                    LastName = "Denire",
+                    Courses = courses
+                    .Where(s => new List<int>
+                    {
+                        101,
+                    }
+                    .Contains(s.CourseID))
+                    .ToList()
+                }
+            };
+
+            foreach (var subject in subjectsUpdate)
+            {
+                db.Subjects.Update(subject);
             }
 
             db.SaveChanges();

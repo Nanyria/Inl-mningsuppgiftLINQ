@@ -15,6 +15,7 @@ namespace InlämningsuppgiftLINQ.Models
         [StringLength(50)]
         public string Name { get; set; }
         public ICollection<Subject> Subjects { get; set; } //List<Teacher>?
+        public ICollection<Student> Students { get; set; }
 
     }
 }
