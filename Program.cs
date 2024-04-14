@@ -1,4 +1,6 @@
-﻿using InlämningsuppgiftLINQ.Models;
+﻿using InlämningsuppgiftLINQ.Data;
+using InlämningsuppgiftLINQ.Models;
+using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace InlämningsuppgiftLINQ
 {
@@ -40,8 +42,111 @@ namespace InlämningsuppgiftLINQ
             //{
             //    Console.WriteLine($"Subject: {subject.subName}\nTeachers: {subject.teach}");
 
-                
+
             //}
+            //----------------------------------------------------------------------------------------------//
+
+            using SchoolDbContext db = new SchoolDbContext();
+
+            var subjects = new List<Subject>()
+            {
+                new Subject()
+                {
+                    SubjectID = 101,
+                    SubjectsName = "Math 1",
+                    Teachers = new List<Teacher>()
+                    {
+                        ////"Anas",
+                        //TeacherID = 101,
+                        ////"Reidar"
+                        //102
+                    }
+                },
+                new Subject()
+                {
+                    SubjectID = 102,
+                    SubjectsName = "Math 2",
+                Teachers = new List<Teacher>()
+                {
+                //    //"Reidar",
+                //    102,
+                //    //"Tobias"
+                //    103
+                }
+                },
+                new Subject()
+                {
+                    SubjectID = 103,
+                    SubjectsName = "Programming 1",
+                    Teachers = new List<Teacher>()
+                    {
+                    //    //"Anas",
+                    //    101,
+                    //    //"Tobias"
+                    //    103
+                    }
+                },
+                    new Subject()
+                {
+                    SubjectID = 104,
+                    SubjectsName = "Programming 2",
+                    Teachers = new List<Teacher>()
+                    {
+                    //    //"Anas",
+                    //    101,
+                    //    //"Reidar",
+                    //    102,
+                    //    //"Tobias"
+                    //    103
+                    }
+                }
+            };
+
+            var teacher = new List<Teacher>()
+            {
+                new Teacher()
+                {
+                    TeacherID = 101,
+                    TeacherName = "Anas",
+                    Subjects = new List<Subject>()
+                    {
+                    //{
+                    //    101,
+                    //    103,
+                    //    104
+                    }
+                },
+                new Teacher()
+                {
+                    TeacherID = 102,
+                    TeacherName = "Reidar",
+                    Subjects = new List<Subject>()
+                    {
+                    //    101,
+                    //    102,
+                    //    104
+                    }
+                },
+                new Teacher()
+                {
+                    TeacherID = 103,
+                    TeacherName = "Tobias",
+                    Subjects = new List<Subject>()
+                    {
+                    //    102,
+                    //    103,
+                    //    104
+                    }
+                }
+            };
+
+            foreach (var subject in subjects)
+            {
+                db.Subjects.Add(subject);
+            }
+
+            db.SaveChanges();
+
 
         }
     }

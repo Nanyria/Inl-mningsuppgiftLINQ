@@ -13,7 +13,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                 columns: table => new
                 {
                     StudentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:Identity", "100, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
@@ -27,7 +27,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                 columns: table => new
                 {
                     TeacherID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:Identity", "100, 1"),
                     TeacherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -40,7 +40,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                 columns: table => new
                 {
                     CourseID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:Identity", "100, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     StudentID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -59,7 +59,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                 columns: table => new
                 {
                     SubjectID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:Identity", "100, 1"),
                     SubjectsName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CourseID = table.Column<int>(type: "int", nullable: true)
                 },
