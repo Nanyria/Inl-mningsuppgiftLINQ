@@ -1,11 +1,12 @@
-﻿using System;
+﻿using InlämningsuppgiftLINQ.Models.CollectionTables;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InlämningsuppgiftLINQ.Models
+namespace InlämningsuppgiftLINQ.Models.BaseModels
 {
     internal class Student
     {
@@ -17,7 +18,7 @@ namespace InlämningsuppgiftLINQ.Models
         [Required]
         [StringLength(50)]
         public string LastName { get; set; }
-        public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
+        public ICollection<CourseStudentsCollection> CourseStudents { get; set; }
 
     }
 }

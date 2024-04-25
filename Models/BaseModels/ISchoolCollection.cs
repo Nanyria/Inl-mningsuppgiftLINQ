@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InlämningsuppgiftLINQ.Models
+namespace InlämningsuppgiftLINQ.Models.BaseModels
 {
     internal interface ISchoolCollection<TEntity>
     {

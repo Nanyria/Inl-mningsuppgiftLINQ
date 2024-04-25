@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InlämningsuppgiftLINQ.Models.BaseModels;
 
-namespace InlämningsuppgiftLINQ.Models
+namespace InlämningsuppgiftLINQ.Models.MethodCollections
 {
     internal class StudentCollection : ISchoolCollection<Student>
     {
         List<Student> students;
 
 
-        public StudentCollection() 
+        public StudentCollection()
         {
             students = new List<Student>()
             {

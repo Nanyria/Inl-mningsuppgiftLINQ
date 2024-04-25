@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InlämningsuppgiftLINQ.Models.CollectionTables;
 
-namespace InlämningsuppgiftLINQ.Models
+namespace InlämningsuppgiftLINQ.Models.BaseModels
 {
     internal class Subject
     {
@@ -14,10 +15,9 @@ namespace InlämningsuppgiftLINQ.Models
         [Required]
         [StringLength(50)]
         public string SubjectsName { get; set; }
-        public Course course { get; set; }
-        public int CourseID { get; set; }
-        public ICollection<Teacher> Teachers { get; set; } = new HashSet<Teacher>();
-        
+        public ICollection<CourseStudentsCollection> CourseStudents { get; set; }
+        public ICollection<SubjectTeachersCollection> SubjectTeachers { get; set; }
+
 
     }
 }

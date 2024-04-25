@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using InlämningsuppgiftLINQ.Models;
+using InlämningsuppgiftLINQ.Models.BaseModels;
 
-namespace InlämningsuppgiftLINQ.Models
+namespace InlämningsuppgiftLINQ.Models.MethodCollections
 {
     internal class CourseCollection : ISchoolCollection<Course>
     {
