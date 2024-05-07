@@ -4,17 +4,18 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using InlämningsuppgiftLINQ.Data;
 using InlämningsuppgiftLINQ.Models.BaseModels;
 
 namespace InlämningsuppgiftLINQ.Models.MethodCollections
 {
     internal class CourseCollection : ISchoolCollection<Course>
     {
-        List<Course> courses;
+        private readonly SchoolDbContext _dbContext;
 
-        public CourseCollection()
+        public CourseCollection(SchoolDbContext dbContext)
         {
-            courses = new List<Course>()
+            _dbContext = dbContext;
             {
 
                 //new Course()
@@ -43,31 +44,32 @@ namespace InlämningsuppgiftLINQ.Models.MethodCollections
 
         public void Add(Course entity)
         {
-            entity.CourseID = courses.Max(c => c.CourseID) + 1;
-            courses.Add(entity);
+            entity.CourseID = _dbContext.Courses.Max(c => c.CourseID) + 1;
+            _dbContext.Courses.Add(entity);
         }
 
         public void Delete(int id)
         {
             var course = Find(id);
-            courses.Remove(course);
+            _dbContext.Courses.Remove(course);
         }
 
         public Course Find(int id)
         {
-            var course = courses.FirstOrDefault(c => c.CourseID == id);
+            var course = _dbContext.Courses.FirstOrDefault(c => c.CourseID == id);
             return course;
         }
 
         public IEnumerable<Course> GetAll()
         {
-            return courses;
+            return _dbContext.Courses;
         }
 
         public void Update(int id, Course entity)
         {
             var course = Find(id);
             course.Name = entity.Name;
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InlämningsuppgiftLINQ.Data;
 using InlämningsuppgiftLINQ.Models.BaseModels;
 
 namespace InlämningsuppgiftLINQ.Models.MethodCollections
 {
     internal class StudentCollection : ISchoolCollection<Student>
     {
-        List<Student> students;
+        private readonly SchoolDbContext _dbContext;
 
 
-        public StudentCollection()
+        public StudentCollection(SchoolDbContext dbContext)
         {
-            students = new List<Student>()
+            _dbContext = dbContext;
             {
                 //new Student()
                 //{
@@ -61,31 +62,32 @@ namespace InlämningsuppgiftLINQ.Models.MethodCollections
         }
         public void Add(Student entity)
         {
-            entity.StudentID = students.Max(c => c.StudentID) + 1;
-            students.Add(entity);
+            entity.StudentID = _dbContext.Students.Max(c => c.StudentID) + 1;
+            _dbContext.Students.Add(entity);
         }
 
         public void Delete(int id)
         {
             var student = Find(id);
-            students.Remove(student);
+            _dbContext.Students.Remove(student);
         }
 
         public Student Find(int id)
         {
-            var student = students.FirstOrDefault(c => c.StudentID == id);
+            var student = _dbContext.Students.FirstOrDefault(c => c.StudentID == id);
             return student;
         }
 
         public IEnumerable<Student> GetAll()
         {
-            return students;
+            return _dbContext.Students;
         }
 
         public void Update(int id, Student entity)
         {
             var student = Find(id);
             student.FirstName = entity.FirstName;
+            _dbContext.SaveChanges();
         }
     }
 }

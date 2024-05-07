@@ -4,6 +4,7 @@ using InlämningsuppgiftLINQ.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InlämningsuppgiftLINQ.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240507112744_240507")]
+    partial class _240507
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,7 +136,7 @@ namespace InlämningsuppgiftLINQ.Migrations
 
                     b.HasIndex("SubjectID");
 
-                    b.ToTable("CourseStudentsCollections");
+                    b.ToTable("CourseStudentsCollection");
                 });
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.CollectionTables.SubjectTeachersCollection", b =>

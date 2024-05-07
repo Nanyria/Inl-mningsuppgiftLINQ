@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InlämningsuppgiftLINQ.Models.BaseModels;
+using InlämningsuppgiftLINQ.Models.CollectionTables;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,6 +16,8 @@ namespace InlämningsuppgiftLINQ.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<SubjectTeachersCollection> SubjectTeachersCollection { get; set; }
+        public DbSet<CourseStudentsCollection> CourseStudentsCollections { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
