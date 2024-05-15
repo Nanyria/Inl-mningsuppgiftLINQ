@@ -4,6 +4,7 @@ using InlämningsuppgiftLINQ.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InlämningsuppgiftLINQ.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240515095302_primary")]
+    partial class primary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +50,9 @@ namespace InlämningsuppgiftLINQ.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"), 1L, 1);
 
+                    b.Property<int?>("CourseID")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -61,14 +66,11 @@ namespace InlämningsuppgiftLINQ.Migrations
                     b.Property<int?>("TeacherID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("courseID")
-                        .HasColumnType("int");
-
                     b.HasKey("StudentID");
 
-                    b.HasIndex("TeacherID");
+                    b.HasIndex("CourseID");
 
-                    b.HasIndex("courseID");
+                    b.HasIndex("TeacherID");
 
                     b.ToTable("Students");
                 });
@@ -236,15 +238,13 @@ namespace InlämningsuppgiftLINQ.Migrations
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.BaseModels.Student", b =>
                 {
+                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Course", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CourseID");
+
                     b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Teacher", "Teacher")
                         .WithMany("Students")
                         .HasForeignKey("TeacherID");
-
-                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Course", "Course")
-                        .WithMany("Students")
-                        .HasForeignKey("courseID");
-
-                    b.Navigation("Course");
 
                     b.Navigation("Teacher");
                 });
@@ -265,7 +265,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                         .IsRequired();
 
                     b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Student", "Student")
-                        .WithMany()
+                        .WithMany("CourseStudents")
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -364,6 +364,8 @@ namespace InlämningsuppgiftLINQ.Migrations
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.BaseModels.Student", b =>
                 {
+                    b.Navigation("CourseStudents");
+
                     b.Navigation("StudentTeachers");
                 });
 

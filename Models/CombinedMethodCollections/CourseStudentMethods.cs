@@ -71,11 +71,6 @@ namespace InlämningsuppgiftLINQ.Models.CombinedMethodCollections
             throw new NotImplementedException();
         }
 
-        CourseStudentsCollection ISchoolCollection<CourseStudentsCollection>.Find(int id)
-        {
-            throw new NotImplementedException();
-        }
-
 
     }
 }

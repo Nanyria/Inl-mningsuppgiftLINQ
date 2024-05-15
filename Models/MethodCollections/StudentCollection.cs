@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using InlämningsuppgiftLINQ.Data;
 using InlämningsuppgiftLINQ.Models.BaseModels;
 
@@ -75,6 +76,14 @@ namespace InlämningsuppgiftLINQ.Models.MethodCollections
         public Student Find(int id)
         {
             var student = _dbContext.Students.FirstOrDefault(c => c.StudentID == id);
+            if (student != null)
+            {
+                Console.WriteLine($"\n{student.StudentID} exists in database");
+            }
+            else
+            {
+                Console.WriteLine($"\n{id} doesn't exist in database");
+            }
             return student;
         }
 

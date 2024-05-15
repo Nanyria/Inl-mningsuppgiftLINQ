@@ -18,7 +18,13 @@ namespace InlämningsuppgiftLINQ.Models.BaseModels
         [Required]
         [StringLength(50)]
         public string LastName { get; set; }
-        public ICollection<CourseStudentsCollection> CourseStudents { get; set; }
 
+        public Teacher Teacher { get; set; }
+        public int? TeacherID { get; set; }
+
+        public Course Course { get; set; }
+        public int? courseID {  get; set; }
+
+        public ICollection<StudentTeachersCollection> StudentTeachers { get; set; }
     }
 }

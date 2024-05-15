@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InlämningsuppgiftLINQ.Models.CollectionTables;
+using InlämningsuppgiftLINQ.Models.MethodCollections;
 
 namespace InlämningsuppgiftLINQ.Models.BaseModels
 {
@@ -15,6 +16,9 @@ namespace InlämningsuppgiftLINQ.Models.BaseModels
         [Required]
         [StringLength(50)]
         public string TeacherName { get; set; }
+
+        public ICollection<Student> Students { get; set; }
         public ICollection<SubjectTeachersCollection> TeacherSubjects { get; set; }
+        public ICollection<StudentTeachersCollection> StudentTeachers { get; set; }
     }
 }

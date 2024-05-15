@@ -4,6 +4,7 @@ using InlämningsuppgiftLINQ.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InlämningsuppgiftLINQ.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240512122148_removeteacherstudent")]
+    partial class removeteacherstudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +50,9 @@ namespace InlämningsuppgiftLINQ.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"), 1L, 1);
 
+                    b.Property<int?>("CourseID")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -58,17 +63,9 @@ namespace InlämningsuppgiftLINQ.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("TeacherID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("courseID")
-                        .HasColumnType("int");
-
                     b.HasKey("StudentID");
 
-                    b.HasIndex("TeacherID");
-
-                    b.HasIndex("courseID");
+                    b.HasIndex("CourseID");
 
                     b.ToTable("Students");
                 });
@@ -165,29 +162,6 @@ namespace InlämningsuppgiftLINQ.Migrations
                     b.ToTable("CourseSubjectsCollections");
                 });
 
-            modelBuilder.Entity("InlämningsuppgiftLINQ.Models.CollectionTables.PrimaryTeacherStudent", b =>
-                {
-                    b.Property<int>("PTSID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PTSID"), 1L, 1);
-
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherID")
-                        .HasColumnType("int");
-
-                    b.HasKey("PTSID");
-
-                    b.HasIndex("StudentID");
-
-                    b.HasIndex("TeacherID");
-
-                    b.ToTable("primaryTeacherStudents");
-                });
-
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.CollectionTables.StudentTeachersCollection", b =>
                 {
                     b.Property<int>("StudentTeacherID")
@@ -236,17 +210,9 @@ namespace InlämningsuppgiftLINQ.Migrations
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.BaseModels.Student", b =>
                 {
-                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Teacher", "Teacher")
+                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Course", null)
                         .WithMany("Students")
-                        .HasForeignKey("TeacherID");
-
-                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Course", "Course")
-                        .WithMany("Students")
-                        .HasForeignKey("courseID");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Teacher");
+                        .HasForeignKey("CourseID");
                 });
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.BaseModels.Subject", b =>
@@ -265,7 +231,7 @@ namespace InlämningsuppgiftLINQ.Migrations
                         .IsRequired();
 
                     b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Student", "Student")
-                        .WithMany()
+                        .WithMany("CourseStudents")
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -296,25 +262,6 @@ namespace InlämningsuppgiftLINQ.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("InlämningsuppgiftLINQ.Models.CollectionTables.PrimaryTeacherStudent", b =>
-                {
-                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InlämningsuppgiftLINQ.Models.BaseModels.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.CollectionTables.StudentTeachersCollection", b =>
@@ -364,6 +311,8 @@ namespace InlämningsuppgiftLINQ.Migrations
 
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.BaseModels.Student", b =>
                 {
+                    b.Navigation("CourseStudents");
+
                     b.Navigation("StudentTeachers");
                 });
 
@@ -377,8 +326,6 @@ namespace InlämningsuppgiftLINQ.Migrations
             modelBuilder.Entity("InlämningsuppgiftLINQ.Models.BaseModels.Teacher", b =>
                 {
                     b.Navigation("StudentTeachers");
-
-                    b.Navigation("Students");
 
                     b.Navigation("TeacherSubjects");
                 });

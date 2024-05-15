@@ -18,6 +18,9 @@ namespace InlämningsuppgiftLINQ.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<SubjectTeachersCollection> SubjectTeachersCollection { get; set; }
         public DbSet<CourseStudentsCollection> CourseStudentsCollections { get; set; }
+        public DbSet<CourseSubjectsCollection> CourseSubjectsCollections { get; set; }
+        public DbSet<StudentTeachersCollection> StudentTeachersCollections { get; set; }
+        public DbSet<PrimaryTeacherStudent> primaryTeacherStudents { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
